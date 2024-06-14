@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const logger = require('./utils/logger');
 const morgan = require('morgan');
 const cors = require("cors");
+const axios = require("axios");
 
 dotenv.config();
 
