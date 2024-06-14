@@ -2,6 +2,12 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Progress = sequelize.define('Progress', {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER
+  },
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false,

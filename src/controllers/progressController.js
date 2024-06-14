@@ -1,5 +1,7 @@
 const Progress = require('../../models/Progress');
 const logger = require('../../utils/logger');
+const user =require("../../models/User");
+const { error } = require('winston');
 
 const getUserProgress = async (req, res) => {
     try {
@@ -16,6 +18,11 @@ const createUserProgress = async (req, res) => {
     try {
         const { progress, courseId } = req.body;
         const isProgress = await Progress.findOne({ where: { userId: req.params.id, courseId } });
+        const isStudent=await user.findByPk(req.params.id)
+        if(isStudent.role==="teacher"){
+            logger.info(`userId: ${req.params.id} is a teacher.`);
+            return res.status(400).json({error:`userId:${req.params.id} is a techer, please provide the student id.`})
+        }
         if (isProgress) {
             logger.info(`Progress report is alreday created for user ID: ${req.params.id}`);
             return res.status(400).json({ error: "progress report is alreday created" });
