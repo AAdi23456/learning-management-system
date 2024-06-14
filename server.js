@@ -21,7 +21,9 @@ app.use(express.json());
 
 app.use(morgan('combined', { stream: logger.stream }));
 
-
+app.get("/isAlive",(req,res)=>{
+    return res.status(200).json({msg:"Hey! I am alive."})
+})
 
 app.get("/",(req,res)=>{
 return   res.redirect("https://documenter.getpostman.com/view/25332112/2sA3XQgMhF");
